@@ -394,6 +394,7 @@ nav li:hover {
   margin: 0 auto 2rem;
   padding-top: 1rem;
   padding-bottom: 2rem;
+  border-bottom: solid hsl(10, 99%, 65%);
 }
 #content {
   width: 40%;
