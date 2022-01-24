@@ -139,7 +139,7 @@ table {
   /* secondary/darker*/
   --clr-secondary-darker: hsl(0, 100%, 80%);
   /* secondary/main color */
-  --clr-secondary: hsl(119, 100%, 86%);
+  --clr-secondary: hsl(218, 57%, 20%);
   /* secondary/lighter */
   --clr-secondary-lighter: hsl(0, 100%, 97%);
   /*others*/
@@ -151,7 +151,7 @@ table {
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: black;
+  color: rgb(250, 246, 246);
   line-height: 1.5;
   font-size: 0.875rem;
 }
@@ -254,7 +254,7 @@ form input {
 }
 .form button {
   display: inline-block;
-  background: var(--clr-primary);
+  background: var(--clr-primary-lighter);
   color: white;
   border-color: transparent;
   margin-top: 2rem;
@@ -311,7 +311,7 @@ form input {
 /*************** Button *****************/
 .btn {
   display: inline-block;
-  background: var(--clr-primary);
+  background: var(--clr-primary-lighter);
   color: white;
   padding: 0.25rem 0.75rem;
   border-radius: var(--radius);
@@ -325,11 +325,11 @@ form input {
   transition: var(--transition);
 }
 .btn:hover {
-  background: var(--clr-primary-lighter);
+  background: var(--clr-primary-darker);
 }
 .btnPublish {
   display: inline-block;
-  background: var(--clr-primary);
+  background: var(--clr-primary-lighter);
   color: white;
   padding: 1.5rem 0.75rem;
   border-radius: var(--radius);
@@ -341,7 +341,7 @@ form input {
   transition: var(--transition);
 }
 .btnPublish:hover {
-  background: var(--clr-primary-lighter);
+  background: var(--clr-primary-darker);
 }
 
 /************** NavBar ***************/
@@ -443,17 +443,19 @@ nav li:hover {
 }
 
 .postList a {
-  color: black;
+  color: var(--clr-secondary);
   width: 100%;
 }
 .postTitle {
   font-weight: bold;
   font-size: 1.125rem;
+  color: var(--clr-secondary);
 }
 .postList p {
   padding-left: 3rem;
   margin-bottom: 1rem;
   text-align: left;
+  color: var(--clr-secondary);
 }
 .postList img {
   width: 400px;
@@ -494,6 +496,9 @@ nav li:hover {
 .commentIcon:hover,
 .sendIcon:hover {
   transform: scale(1.25);
+}
+.trashIcon {
+  color: var(--clr-secondary);
 }
 .updateIcon {
   margin-right: 1rem;
