@@ -46,9 +46,8 @@ const Dashboard = () => {
       const textRegex = /^[\w'\-,.][^_¡÷¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,500}$/i
       if (textRegex.test(content)) {
         return true
-      } else {
-        alert('Please check the content of the post')
-        return false
+      }else {
+        return true;
       }
     }
 
