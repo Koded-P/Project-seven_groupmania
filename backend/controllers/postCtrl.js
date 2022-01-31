@@ -14,8 +14,9 @@ exports.createPost = (req, res, next) => {
           req.file.filename
         }`,
         like: 0,
+
       }
-    : { ...req.body, like: 0 }
+    : { ...req.body, like: 0, }
     
   Post.create(post)
     .then(() => res.status(201).json({ message: 'Post created' }))
@@ -70,7 +71,8 @@ exports.deletePost = (req, res, next) => {
 
 // Retrieve all publications
 exports.getAllPosts = (req, res, next) => {
-  Post.findAll({ include: User })
+  Post.findAll({ order: [["createdAt", "ASC"]]
+  , include: User })
     .then((posts) => res.status(200).json(posts))
     .catch((error) =>
       res
@@ -125,4 +127,21 @@ exports.updatePost = (req, res, next) => {
         .status(400)
         .json({ message: 'Unable to update post' + error })
     )
+}
+
+// unread messages
+exports.unread = (req, res, next) => {
+  View.findOne({
+    where: { userId: req.body.userId, postId: req.body.postId },
+  }).then((response) => {
+    if (!response) {
+      View.create({ ...req.body })
+      Post.increment({ view: 1 }, { where: { id: req.body.postId } })
+      res
+        .status(200)
+        .json({ message: 'post read by you' })
+    } else {
+      res.status(200).json({ message: 'This post has been viewed by current logged in user' })
+    }
+  })
 }

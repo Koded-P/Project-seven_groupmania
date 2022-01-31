@@ -47,7 +47,8 @@ const Dashboard = () => {
       if (textRegex.test(content)) {
         return true
       }else {
-        return true;
+        alert('please include a post')
+        return false;
       }
     }
 
@@ -128,6 +129,24 @@ const Dashboard = () => {
                     userId: userId,
                   },
                   url: `http://localhost:5050/posts/${id}/like`,
+                  headers: {
+                    Authorization: 'Bearer ' + token,
+                  },
+                })
+                  .then(() => {
+                    getPosts()
+                  })
+                  .catch((error) => console.log(error))
+              }
+
+              const updateView = () => {
+                axios({
+                  method: 'POST',
+                  data: {
+                    postId: id,
+                    userId: userId,
+                  },
+                  url: `http://localhost:5050/posts/${id}/view`,
                   headers: {
                     Authorization: 'Bearer ' + token,
                   },
