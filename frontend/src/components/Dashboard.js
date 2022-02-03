@@ -47,8 +47,8 @@ const Dashboard = () => {
       if (textRegex.test(content)) {
         return true
       }else {
-        alert('please include a post')
-        return false;
+        // alert('please include a post')
+        return true;
       }
     }
 
@@ -200,11 +200,16 @@ const Dashboard = () => {
                 const comments = await response.json()
                 setComments(comments.data)
               }
+              // console.log(new Date().toLocaleDateString() ,'createdat')
+              // console.log(new Date(createdAt).toLocaleDateString() ,'new date')
 
               return (
                 <li key={id}>
                   <div className='headerPost'>
                     <h2 className='postTitle'>
+                      {(new Date(createdAt).toLocaleDateString() == new Date().toLocaleDateString() && 
+                        <p className="badge">new</p>
+                      ) }
                       By{' '}
                       <Link to={`profile/${user.id}`}>
                         {' '}

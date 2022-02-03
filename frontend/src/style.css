@@ -218,6 +218,9 @@ body {
   text-align: center;
   margin-top: 5rem;
 }
+.badge{
+  background-color: red;
+}
 .logo {
   width: 500px;
   margin-bottom: 50px;
