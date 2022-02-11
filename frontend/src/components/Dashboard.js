@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [file, setFile] = useState('')
   const [comments, setComments] = useState([])
   const [comment, setComment] = useState('')
+  const [messages, setMessages]=useState('')
   const [updatePostContent, setUpdatePostContent] = useState(false)
   const [newContent, setNewContent] = useState('')
 
@@ -32,8 +33,16 @@ const Dashboard = () => {
     })
     
     const posts = await response.json()
-    console.log(posts)
+    console.log(posts[0].id)
     setPosts(posts)
+     const id = posts[0].id
+      const responses = await fetch(
+        `http://localhost:5050/posts/${id}/comment`,
+        { headers: { Authorization: 'Bearer ' + token } }
+      )
+      const comments = await responses.json()
+      console.log(comments.data.length)
+      setMessages(comments.data.length)
   }
 
   useEffect(() => {
@@ -198,7 +207,9 @@ const Dashboard = () => {
                   { headers: { Authorization: 'Bearer ' + token } }
                 )
                 const comments = await response.json()
+                console.log(comments)
                 setComments(comments.data)
+                setMessages('')                
               }
               // console.log(new Date().toLocaleDateString() ,'createdat')
               // console.log(new Date(createdAt).toLocaleDateString() ,'new date')
@@ -207,9 +218,7 @@ const Dashboard = () => {
                 <li key={id}>
                   <div className='headerPost'>
                     <h2 className='postTitle'>
-                      {(new Date(createdAt).toLocaleDateString() == new Date().toLocaleDateString() && 
-                        <p className="badge">new</p>
-                      ) }
+                      {(new Date(createdAt).toLocaleDateString() == new Date().toLocaleDateString())}
                       By{' '}
                       <Link to={`profile/${user.id}`}>
                         {' '}
@@ -248,11 +257,14 @@ const Dashboard = () => {
                         To send
                       </FiSend>
                     </form>
+                    <div className='likeBox'>
                     <ImBubbles3
                       size={28}
                       className='commentIcon'
                       onClick={getComments}
                     />
+                    <span>{messages}</span>
+                    </div>
                     <div className='likeBox'>
                       <HiHeart
                         size={28}
